@@ -3,6 +3,7 @@
 
 
 import os
+import sys
 import json
 import platform
 from time import sleep
@@ -129,6 +130,12 @@ class ChromeDrive:
 
 
     def sec_kill(self):
+        NowTimeStrf = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        NowTimeSTrp = datetime.strptime(NowTimeStrf, "%Y-%m-%d %H:%M:%S")
+        if self.seckill_time_obj <= NowTimeSTrp:
+            print("抢购时间已过，程序退出执行")
+            sys.exit()
+            
         self.keep_wait()
         self.driver.get("https://cart.taobao.com/cart.htm")
         sleep(1)
